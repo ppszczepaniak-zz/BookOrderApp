@@ -1,5 +1,5 @@
 #BookOrderApp 
-[![Build Status](https://travis-ci.org/pedro-programator/BookOrderApp.svg?branch=master)](https://travis-ci.org/pedro-programator/BookOrderApp)
+[![Build Status](https://travis-ci.org/ppszczepaniak/BookOrderApp.svg?branch=master)](https://travis-ci.org/pedro-programator/BookOrderApp)
 
 Web app (REST API, NanoHTTPD server) which allows to CRUD books, clients and orders in PostgreSQL
 
