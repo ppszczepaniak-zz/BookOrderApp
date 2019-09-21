@@ -13,4 +13,6 @@ public interface CustomerStorage {
     long addCustomer(Customer customer); //shoud return customerId
 
     void clearTableCustomers();
+
+    //TODO add Delete customer feature
 }

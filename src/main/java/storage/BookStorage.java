@@ -12,4 +12,6 @@ public interface BookStorage {
     long addBook(Book book); //shoud return bookId
 
     void clearTableBooks();
+
+    //TODO add Delete book feature
 }

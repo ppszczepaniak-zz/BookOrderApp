@@ -1,4 +1,4 @@
-#BookOrderApp 
+# BookOrderApp 
 [![Build Status](https://travis-ci.org/ppszczepaniak/BookOrderApp.svg?branch=master)](https://travis-ci.org/pedro-programator/BookOrderApp)
 
 Web app (REST API, NanoHTTPD server) which allows to CRUD books, clients and orders in PostgreSQL
@@ -50,7 +50,7 @@ CREATE SEQUENCE sequence_customers
 UPDATE customers SET customer_id=(NEXTVAL('sequence_customers'));
 ``` 
 ***
-####How stuff works:  
+#### How stuff works:  
 >in Postman:
      * POST http://localhost:8080/book/add +in BODY: fill some JSON, see bookExample.txt  
      * GET http://localhost:8080/book/getAll  
