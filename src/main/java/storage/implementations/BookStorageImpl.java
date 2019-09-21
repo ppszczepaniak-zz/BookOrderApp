@@ -1,17 +1,18 @@
-package storage;
+package storage.implementations;
 
+import storage.BookStorage;
 import type.Book;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookStorageImplementation implements BookStorage {
+public class BookStorageImpl implements BookStorage {
 
     private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/bookorder"; //create it first
     private static final String DATABASE_USER = "postgres";
     private static final String DATABASE_PASS = "postgres";  //or postgress
-    private static List<Book> bookStorage = new ArrayList<>();
+    private static List<Book> bookList = new ArrayList<>();
 
     static {  //loading Driver class so it works on older Java or JDBC (blok statyczny, odpali sie na starcie)
         try {
@@ -51,7 +52,7 @@ public class BookStorageImplementation implements BookStorage {
                 "book_id, title)" +
                 "VALUES (NEXTVAL('sequence_books'),?) RETURNING book_id;"; //1) dodaje NEXTVAL('sequence_books') zeby autonumerowal
         // po mojej wlasnej sekw. ktora stworzylem w POSTGRES
-        //2) RETURNING zwraca wartosc z book_id,
+        // 2) RETURNING zwraca wartosc z book_id,
         // po to zebym mogl ja przekazac do BookControllera
 
         Connection connection = initializeDataBaseConnection(); //odpalamy połączenie
@@ -92,7 +93,7 @@ public class BookStorageImplementation implements BookStorage {
 
             if (resultSet.next()) {  //jesli jest taka ksiazka w bazie to zwroc, else null (na koncu)
                 Book book = new Book(); //tworze nowa ksiazke, jesli jest kolejny rekord w bazie
-                book.setId(resultSet.getLong("book_id"));
+                book.setBookId(resultSet.getLong("book_id"));
                 book.setTitle(resultSet.getString("title"));
 
                 return book;
@@ -108,7 +109,7 @@ public class BookStorageImplementation implements BookStorage {
 
     @Override
     public List<Book> getAllBooks() {
-        bookStorage.clear(); //czyszcze liste, bo inaczej kazde wywolanie getAllBooks dopisywaloby wszystkie do listy
+        bookList.clear(); //czyszcze liste, bo inaczej kazde wywolanie getAllBooks dopisywaloby wszystkie do listy
         final String sqlSelectAllBook = "SELECT * from books;";
 
         Connection connection = initializeDataBaseConnection();
@@ -121,10 +122,10 @@ public class BookStorageImplementation implements BookStorage {
             while (resultSet.next()) {  //next idzie na kolejny wiersz i zwraca true, jeśli jest
                 Book book = new Book(); //tworze nowa ksiazke, jesli jest kolejny rekord w bazie
 
-                book.setId(resultSet.getLong("book_id"));
+                book.setBookId(resultSet.getLong("book_id"));
                 book.setTitle(resultSet.getString("title"));
 
-                bookStorage.add(book);
+                bookList.add(book);
             }
         } catch (SQLException e) {
             System.err.println("Error during invoking SQL query:\n" + e.getMessage());
@@ -133,7 +134,7 @@ public class BookStorageImplementation implements BookStorage {
         } finally {
             closeDatabaseResources(statement, connection);
         }
-        return bookStorage;
+        return bookList;
     }
 
     @Override

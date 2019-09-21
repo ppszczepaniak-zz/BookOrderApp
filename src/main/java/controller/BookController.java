@@ -2,9 +2,9 @@ package controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fi.iki.elonen.NanoHTTPD;
+import fi.iki.elonen.NanoHTTPD.*;
 import storage.BookStorage;
-import storage.BookStorageImplementation;
+import storage.implementations.BookStorageImpl;
 import type.Book;
 
 import java.util.List;
@@ -14,15 +14,14 @@ import static fi.iki.elonen.NanoHTTPD.Response.Status.*;
 import static fi.iki.elonen.NanoHTTPD.newFixedLengthResponse;
 
 public class BookController {
-    private BookStorage bookStorage = new BookStorageImplementation(); //creates storage of books via SQL
-
+    private BookStorage bookStorage = new BookStorageImpl(); //creates storage of books via SQL
     public BookStorage getBookStorage() {
         return bookStorage;
     }
 
     private static final String BOOK_IT_PARAM_NAME = "bookId"; //used to get book from storage
 
-    public NanoHTTPD.Response serveGetBookRequest(NanoHTTPD.IHTTPSession session) {
+    public Response serveGetBookRequest(IHTTPSession session) {
         Map<String, List<String>> requestParameters = session.getParameters(); //takes all params from session
         if (requestParameters.containsKey(BOOK_IT_PARAM_NAME)) { //if there is a parameter bookID, then...
             List<String> bookIdparams = requestParameters.get(BOOK_IT_PARAM_NAME); //gets list of parameters
@@ -60,7 +59,7 @@ public class BookController {
         }
     }
 
-    public NanoHTTPD.Response serveGetAllBooksRequest(NanoHTTPD.IHTTPSession session) {
+    public Response serveGetAllBooksRequest(IHTTPSession session) {
         ObjectMapper objectMapper = new ObjectMapper();
         String response;
 
@@ -75,7 +74,7 @@ public class BookController {
         return newFixedLengthResponse(OK, "application/json", response); //zwraca liste ksiazek w JSON
     }
 
-    public NanoHTTPD.Response serveAddBookRequest(NanoHTTPD.IHTTPSession session) {
+    public Response serveAddBookRequest(IHTTPSession session) {
         ObjectMapper objectMapper = new ObjectMapper();
         long bookId;
         String lengthHeader = session.getHeaders().get("content-length"); //reads content length (in bytes) from headers (indicates the size of the entity-body)

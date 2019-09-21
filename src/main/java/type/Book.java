@@ -1,15 +1,15 @@
 package type;
 
 public class Book {
-    private long id;
+    private long bookId;
     private String title;
 
-    public long getId() {
-        return id;
+    public long getBookId() {
+        return bookId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setBookId(long bookId) {
+        this.bookId = bookId;
     }
 
     public String getTitle() {

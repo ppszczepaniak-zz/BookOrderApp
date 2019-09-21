@@ -9,7 +9,7 @@ public interface BookStorage {
 
     List<Book> getAllBooks();
 
-    long addBook(Book book);
+    long addBook(Book book); //shoud return bookId
 
     void clearTableBooks();
 }
