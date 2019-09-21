@@ -1,9 +1,16 @@
+import dispatcher.RequestUrlMapper;
 import fi.iki.elonen.NanoHTTPD;
 
 import java.io.IOException;
 
 public class BookOderApp extends NanoHTTPD {
 
+    private RequestUrlMapper requestUrlMapper = new RequestUrlMapper();
+
+//    //clears DB at the beginning (for tests)
+//    public void clear() {
+//        requestUrlMapper.getBookController().getBookStorage().clearDatabase();
+//    }
 
     private BookOderApp(int port) throws IOException {
         super(port);
@@ -12,7 +19,6 @@ public class BookOderApp extends NanoHTTPD {
     }
 
     public static void main(String[] args) {
-
         try {
             new BookOderApp(8080);
         } catch (IOException e) {
@@ -22,7 +28,6 @@ public class BookOderApp extends NanoHTTPD {
 
     @Override
     public Response serve(IHTTPSession session) {
-        return null;
+        return requestUrlMapper.delegateRequest(session);
     }
-
 }
