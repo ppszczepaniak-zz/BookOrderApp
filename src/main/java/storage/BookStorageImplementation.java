@@ -137,7 +137,7 @@ public class BookStorageImplementation implements BookStorage {
     }
 
     @Override
-    public void clearDatabase() {
+    public void clearTableBooks() {
         final String sqlClearDB = "DELETE from books"; //removes all from table
         Connection connection = initializeDataBaseConnection(); //odpalamy połączenie
         Statement statement = null;

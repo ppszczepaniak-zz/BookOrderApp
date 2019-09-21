@@ -11,5 +11,5 @@ public interface BookStorage {
 
     long addBook(Book book);
 
-    void clearDatabase();
+    void clearTableBooks();
 }

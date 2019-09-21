@@ -7,9 +7,9 @@ public class BookOderApp extends NanoHTTPD {
 
     private RequestUrlMapper requestUrlMapper = new RequestUrlMapper();
 
-//    //clears DB at the beginning (for tests)
+//    //clears table at the beginning (for tests)
 //    public void clear() {
-//        requestUrlMapper.getBookController().getBookStorage().clearDatabase();
+//        requestUrlMapper.getBookController().getBookStorage().clearTableBooks();
 //    }
 
     private BookOderApp(int port) throws IOException {

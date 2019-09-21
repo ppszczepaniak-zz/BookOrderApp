@@ -22,4 +22,4 @@ CREATE SEQUENCE sequence_books
    MINVALUE 1 
    START WITH 1;
    
- UPDATE books SET book_id=(NEXTVAL('sekwencja')); 
+ UPDATE books SET book_id=(NEXTVAL('sequence_books')); 
