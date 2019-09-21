@@ -3,11 +3,8 @@ package controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fi.iki.elonen.NanoHTTPD.*;
-import storage.BookStorage;
 import storage.CustomerStorage;
-import storage.implementations.BookStorageImpl;
 import storage.implementations.CustomerStorageImpl;
-import type.Book;
 import type.Customer;
 
 import java.util.List;
@@ -27,31 +24,31 @@ public class CustomerController {
     private static final String CUSTOMER_ID_PARAM_NAME = "customerId"; //used to get customer from storage
 
     public Response serveAddCustomerRequest(IHTTPSession session) {
-//        ObjectMapper objectMapper = new ObjectMapper(); //to convert Java objects into JSON
-//        long customerId;
-//        String lengthHeader = session.getHeaders().get("content-length"); //reads content length (in bytes) from headers (indicates the size of the entity-body)
-//        int contentLength = Integer.parseInt(lengthHeader); //converts to int
-//        byte[] buffer = new byte[contentLength]; //creates table of that many bytes (buffer)
-//
-//        try {
-//            //noinspection ResultOfMethodCallIgnored
-//            session.getInputStream().read(buffer, 0, contentLength);    /* reads "body" of the request -> read(buffer, offset, length)
-//                                                                             buffer - data will be put into this
-//                                                                             offset - starting point of reading (skip something?)
-//                                                                             length - how much do we read */
-//            String requestBody = new String(buffer).trim();       //creates string from updated buffer data, trims whitespaces
-//            Book requestBook = objectMapper.readValue(requestBody, Book.class); /*creates book from JSON data -> readValue(content,value type)
-//                                                                                content - String in JSON, used to create object
-//                                                                                value type - we point Java class, of which object should be created*/
-//            bookId = bookStorage.addBook(requestBook); //adds book to bookStorage and returns ID of the book
-//
-//        } catch (Exception e) {
-//            System.err.println("Error during process request: \n" + e);
-//            return newFixedLengthResponse(INTERNAL_ERROR, "text/plain", "Internal error! Book has not been added.");
-//        }
-//
-//        return newFixedLengthResponse(OK, "text/plain", "Book has been successfully added. The ID of the book is: " + bookId); //zwraca liste ksiazek w JSON
-        return null;
+        ObjectMapper objectMapper = new ObjectMapper(); //to convert Java objects into JSON
+        long customerId;
+        String lengthHeader = session.getHeaders().get("content-length"); //reads content length (in bytes) from headers (indicates the size of the entity-body)
+        int contentLength = Integer.parseInt(lengthHeader); //converts to int
+        byte[] buffer = new byte[contentLength]; //creates table of that many bytes (buffer)
+
+        try {
+            //noinspection ResultOfMethodCallIgnored
+            session.getInputStream().read(buffer, 0, contentLength);    /* reads "body" of the request -> read(buffer, offset, length)
+                                                                             buffer - data will be put into this
+                                                                             offset - starting point of reading (skip something?)
+                                                                             length - how much do we read */
+            String requestBody = new String(buffer).trim();       //creates string from updated buffer data, trims whitespaces
+            Customer chosenCustomer = objectMapper.readValue(requestBody, Customer.class); /*creates customer from JSON data -> readValue(content, value type)
+                                                                                content - String in JSON, used to create object
+                                                                                value type - we point Java class, of which object should be created*/
+            customerId = customerStorage.addCustomer(chosenCustomer); //adds customer to customerStorage and returns ID of the customer
+
+        } catch (Exception e) {
+            System.err.println("Error during process request: \n" + e);
+            return newFixedLengthResponse(INTERNAL_ERROR, "text/plain", "Internal error! Customer has not been added.");
+        }
+
+        return newFixedLengthResponse(OK, "text/plain", "Customer has been successfully added. The ID of the customer is: " + customerId); //zwraca liste ksiazek w JSON
+
     }
 
     public Response serveGetAllCustomersRequest(IHTTPSession session) {
