@@ -50,6 +50,32 @@ CREATE SEQUENCE sequence_customers
 UPDATE customers SET customer_id=(NEXTVAL('sequence_customers'));
 ``` 
 ***
+orders
+```
+create table orders
+(
+   order_id bigint not null,
+   order_date timestamp NOT NULL,
+   customer_id bigint NOT NULL
+);
+
+
+ALTER TABLE orders ADD CONSTRAINT orders_id_pk PRIMARY KEY (order_id);
+
+
+ALTER TABLE orders 
+ADD CONSTRAINT customer_id_fk FOREIGN KEY (customer_id) REFERENCES customers(customer_id);
+
+
+CREATE SEQUENCE sequence_orders
+   AS BIGINT 
+   INCREMENT BY 1 
+   MINVALUE 1 
+   START WITH 1;
+   
+ UPDATE orders SET order_id=(NEXTVAL('sequence_orders'));
+```
+>CURRENT_TIMESTAMP == now()
 ####How stuff works:  
 >in Postman:
      * POST http://localhost:8080/book/add +in BODY: fill some JSON, see bookExample.txt  
