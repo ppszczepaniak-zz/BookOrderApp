@@ -8,9 +8,12 @@ import storage.CustomerStorage;
 import storage.implementations.BookStorageImpl;
 import storage.implementations.CustomerStorageImpl;
 import type.Book;
+import type.Customer;
 
-import static fi.iki.elonen.NanoHTTPD.Response.Status.INTERNAL_ERROR;
-import static fi.iki.elonen.NanoHTTPD.Response.Status.OK;
+import java.util.List;
+import java.util.Map;
+
+import static fi.iki.elonen.NanoHTTPD.Response.Status.*;
 import static fi.iki.elonen.NanoHTTPD.newFixedLengthResponse;
 
 public class CustomerController {
@@ -21,7 +24,7 @@ public class CustomerController {
         return customerStorage;
     }
 
-    private static final String CUSTOMER_IT_PARAM_NAME = "customerId"; //used to get book from storage
+    private static final String CUSTOMER_ID_PARAM_NAME = "customerId"; //used to get customer from storage
 
     public Response serveAddCustomerRequest(IHTTPSession session) {
 //        ObjectMapper objectMapper = new ObjectMapper(); //to convert Java objects into JSON
@@ -65,6 +68,40 @@ public class CustomerController {
     }
 
     public Response serveGetCustomerRequest(IHTTPSession session) {
-        return null;
+        Map<String, List<String>> requestParameters = session.getParameters(); //takes all params from session
+
+        if (requestParameters.containsKey(CUSTOMER_ID_PARAM_NAME)) { //if there is a parameter customerID, then...
+            List<String> customerIdparams = requestParameters.get(CUSTOMER_ID_PARAM_NAME); //gets list of parameters
+            String customerIdParam = customerIdparams.get(0); //gets 1st
+            long customerID;
+
+            try {
+                customerID = Long.parseLong(customerIdParam);
+            } catch (NumberFormatException nfe) { //if NaN
+                System.err.println("Error during converting of request parameter: \n" + nfe);
+                return newFixedLengthResponse(BAD_REQUEST, "text/plain", "Request parameter 'customerID' must be a number!");
+            }
+
+            Customer foundCustomer = customerStorage.getCustomer(customerID);
+            if (foundCustomer != null) { //if this customer we take isn't empty
+                ObjectMapper objectMapper = new ObjectMapper(); //to convert Java objects into JSON
+
+                try {
+                    String response = objectMapper.writeValueAsString(foundCustomer); //przypisuje customera do Stringa w formacie JSON
+                    return newFixedLengthResponse(OK, "application/json", response); //zwracam string w JSON
+
+                } catch (JsonProcessingException e) {
+                    System.err.println("Error during process request: \n" + e);
+                    return newFixedLengthResponse(INTERNAL_ERROR, "text/plain", "Internal error! Can't read a customer.");
+                }
+
+            } else {
+                return newFixedLengthResponse(NOT_FOUND, "application/json", ""); //return when such customer hasn't been found
+            }
+
+        } else {
+            return newFixedLengthResponse(BAD_REQUEST, "text/plain", "Incorrect request parameter!"); //return when there there's no customerID param in request
+        }
     }
+
 }

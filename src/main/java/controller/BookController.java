@@ -19,12 +19,12 @@ public class BookController {
         return bookStorage;
     }
 
-    private static final String BOOK_IT_PARAM_NAME = "bookId"; //used to get book from storage
+    private static final String BOOK_ID_PARAM_NAME = "bookId"; //used to get book from storage
 
     public Response serveGetBookRequest(IHTTPSession session) {
         Map<String, List<String>> requestParameters = session.getParameters(); //takes all params from session
-        if (requestParameters.containsKey(BOOK_IT_PARAM_NAME)) { //if there is a parameter bookID, then...
-            List<String> bookIdparams = requestParameters.get(BOOK_IT_PARAM_NAME); //gets list of parameters
+        if (requestParameters.containsKey(BOOK_ID_PARAM_NAME)) { //if there is a parameter bookID, then...
+            List<String> bookIdparams = requestParameters.get(BOOK_ID_PARAM_NAME); //gets list of parameters
             String bookIdparam = bookIdparams.get(0); //gets 1st
             long bookId;
 

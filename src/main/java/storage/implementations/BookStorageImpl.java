@@ -81,14 +81,14 @@ public class BookStorageImpl implements BookStorage {
     }
 
     @Override
-    public Book getBook(long id) {
+    public Book getBook(long bookId) {
         final String sqlSelectAllBook = "SELECT * from books WHERE book_id = ?;";
         Connection connection = initializeDataBaseConnection(); //odpalamy połączenie
         PreparedStatement preparedStatement = null;
 
         try {
             preparedStatement = connection.prepareStatement(sqlSelectAllBook);
-            preparedStatement.setLong(1, id);
+            preparedStatement.setLong(1, bookId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {  //jesli jest taka ksiazka w bazie to zwroc, else null (na koncu)

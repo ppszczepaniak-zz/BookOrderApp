@@ -3,7 +3,7 @@
 
 Web app (REST API, NanoHTTPD server) which allows to CRUD books, clients and orders in PostgreSQL
 
-Postgres SQL - create database via these commands:
+### Postgres SQL - create database via these commands:
 ****
 create db
 ```
@@ -50,5 +50,11 @@ CREATE SEQUENCE sequence_customers
 UPDATE customers SET customer_id=(NEXTVAL('sequence_customers'));
 ``` 
 ***
+####How stuff works:  
+>in Postman:
+     * POST http://localhost:8080/book/add +in BODY: fill some JSON, see bookExample.txt  
+     * GET http://localhost:8080/book/getAll  
+     * GET http://localhost:8080/book/get +in PARAMS: add bookId, value: [number - first add book, and find one ID by getAll]
 
-
+use these parameters:
+- customerId, bookid
