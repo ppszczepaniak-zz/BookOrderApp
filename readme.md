@@ -55,7 +55,7 @@ orders
 create table orders
 (
    order_id bigint not null,
-   order_date timestamp NOT NULL,
+   order_date timestamptz NOT NULL,
    customer_id bigint NOT NULL
 );
 

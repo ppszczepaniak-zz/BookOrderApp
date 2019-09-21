@@ -1,12 +1,11 @@
 package storage;
 
-import type.Book;
 import type.Customer;
 
 import java.util.List;
 
 public interface CustomerStorage {
-    Customer getCustomer(long id);
+    Customer getCustomer(long customerId);
 
     List<Customer> getAllCustomers();
 

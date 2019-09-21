@@ -5,7 +5,7 @@ import type.Book;
 import java.util.List;
 
 public interface BookStorage {
-    Book getBook(long id);
+    Book getBook(long bookId);
 
     List<Book> getAllBooks();
 
