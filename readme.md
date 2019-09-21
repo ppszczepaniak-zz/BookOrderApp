@@ -39,7 +39,9 @@ create table customers
    name character varying(256) NOT NULL
 );
 
-ALTER TABLE customers ADD CONSTRAINT customers_id_pk PRIMARY KEY (customer_id);
+ALTER TABLE customers 
+ADD CONSTRAINT customers_id_pk 
+PRIMARY KEY (customer_id);
 
 CREATE SEQUENCE sequence_customers
    AS BIGINT 
@@ -59,13 +61,13 @@ create table orders
    customer_id bigint NOT NULL
 );
 
-
-ALTER TABLE orders ADD CONSTRAINT orders_id_pk PRIMARY KEY (order_id);
-
+ALTER TABLE orders 
+ADD CONSTRAINT orders_id_pk 
+PRIMARY KEY (order_id);
 
 ALTER TABLE orders 
-ADD CONSTRAINT customer_id_fk FOREIGN KEY (customer_id) REFERENCES customers(customer_id);
-
+ADD CONSTRAINT customer_id_fk 
+FOREIGN KEY (customer_id) REFERENCES customers(customer_id);
 
 CREATE SEQUENCE sequence_orders
    AS BIGINT 
@@ -73,7 +75,7 @@ CREATE SEQUENCE sequence_orders
    MINVALUE 1 
    START WITH 1;
    
- UPDATE orders SET order_id=(NEXTVAL('sequence_orders'));
+UPDATE orders SET order_id=(NEXTVAL('sequence_orders'));
 ```
 to add values in orders
 ```

@@ -1,6 +1,6 @@
 package storage;
 
-import type.Customer;
+import models.Customer;
 
 import java.util.List;
 

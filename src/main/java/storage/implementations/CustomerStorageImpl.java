@@ -1,8 +1,7 @@
 package storage.implementations;
 
 import storage.CustomerStorage;
-import type.Book;
-import type.Customer;
+import models.Customer;
 
 import java.sql.*;
 import java.util.ArrayList;

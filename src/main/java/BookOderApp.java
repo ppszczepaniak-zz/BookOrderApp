@@ -10,6 +10,8 @@ public class BookOderApp extends NanoHTTPD {
 //    //clears table at the beginning (for tests)
 //    public void clear() {
 //        requestUrlMapper.getBookController().getBookStorage().clearTableBooks();
+//        requestUrlMapper.getCustomerController().getCustomerStorage().clearTableCustomers();
+//        //+ add orders
 //    }
 
     private BookOderApp(int port) throws IOException {

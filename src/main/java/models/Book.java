@@ -1,4 +1,4 @@
-package type;
+package models;
 
 public class Book {
     private long bookId;

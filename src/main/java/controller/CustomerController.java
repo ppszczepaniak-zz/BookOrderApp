@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fi.iki.elonen.NanoHTTPD.*;
 import storage.CustomerStorage;
 import storage.implementations.CustomerStorageImpl;
-import type.Customer;
+import models.Customer;
 
 import java.util.List;
 import java.util.Map;

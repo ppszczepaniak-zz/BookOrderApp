@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fi.iki.elonen.NanoHTTPD.*;
 import storage.BookStorage;
 import storage.implementations.BookStorageImpl;
-import type.Book;
+import models.Book;
 
 import java.util.List;
 import java.util.Map;

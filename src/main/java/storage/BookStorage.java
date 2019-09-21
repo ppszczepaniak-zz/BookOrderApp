@@ -1,6 +1,6 @@
 package storage;
 
-import type.Book;
+import models.Book;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package storage.implementations;
 
 import storage.BookStorage;
-import type.Book;
+import models.Book;
 
 import java.sql.*;
 import java.util.ArrayList;

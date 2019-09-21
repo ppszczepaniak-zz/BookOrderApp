@@ -1,11 +1,11 @@
 package storage.implementations;
 
 import storage.OrderStorage;
-import type.Order;
+import models.Order;
 
 import java.util.List;
 
-public class OrderStorageImpl implements OrderStorage {
+public class OrderStorageImpl implements OrderStorage { //TODO fill these
     @Override
     public Order getOrder(long orderId) {
         return null;
