@@ -39,7 +39,7 @@ public class BookController {
             Book foundBook = bookStorage.getBook(bookId);
 
             if (foundBook != null) { //if this book we take isn't empty
-                ObjectMapper objectMapper = new ObjectMapper();
+                ObjectMapper objectMapper = new ObjectMapper();   //good intro to ObjectMapper https://www.baeldung.com/jackson-object-mapper-tutorial
 
                 try {
                     String response = objectMapper.writeValueAsString(foundBook); //przypisuje ksiazke do Stringa w formacie JSON
