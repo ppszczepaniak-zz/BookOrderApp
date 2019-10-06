@@ -68,7 +68,6 @@ ADD CONSTRAINT customer_id_fk
 FOREIGN KEY (customer_id) REFERENCES customers(customer_id);
 
 CREATE SEQUENCE sequence_orders
-   AS BIGINT 
    INCREMENT BY 1 
    MINVALUE 1 
    START WITH 1;
