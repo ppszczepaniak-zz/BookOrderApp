@@ -43,7 +43,6 @@ ADD CONSTRAINT customers_id_pk
 PRIMARY KEY (customer_id);
 
 CREATE SEQUENCE sequence_customers
-   AS BIGINT 
    INCREMENT BY 1 
    MINVALUE 1 
    START WITH 1;
