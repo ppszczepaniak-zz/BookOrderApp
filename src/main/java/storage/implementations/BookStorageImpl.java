@@ -11,7 +11,7 @@ public class BookStorageImpl implements BookStorage {
 
     private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/bookorder"; //create it first
     private static final String DATABASE_USER = "postgres";
-    private static final String DATABASE_PASS = "postgres";  //or postgress
+    private static final String DATABASE_PASS = "password";  //or postgress
     private static List<Book> bookList = new ArrayList<>();
 
     static {  //loading Driver class so it works on older Java or JDBC (blok statyczny, odpali sie na starcie)

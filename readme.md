@@ -23,7 +23,6 @@ create table books
 ALTER TABLE books ADD CONSTRAINT book_id_pk PRIMARY KEY (book_id);
 
 CREATE SEQUENCE sequence_books
-   AS BIGINT 
    INCREMENT BY 1 
    MINVALUE 1 
    START WITH 1;
