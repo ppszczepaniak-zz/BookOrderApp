@@ -74,11 +74,7 @@ CREATE SEQUENCE sequence_orders
    
 UPDATE orders SET order_id=(NEXTVAL('sequence_orders'));
 ```
-to add values in orders
-```
-INSERT INTO orders (order_id, order_date,customer_id) VALUES (NEXTVAL('sequence_orders'), CURRENT_TIMESTAMP, 1);
-```
->CURRENT_TIMESTAMP == now()
+
 
 #### How stuff works:  
 >in Postman:

@@ -1,5 +1,6 @@
 package storage;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Order;
 
 import java.util.List;
@@ -12,7 +13,21 @@ public interface OrderStorage {
     List<Order> getAllOrders();  //secondary to implement
 
     long addOrder(Order order); //should return OrderId + should change two tables: orders & order_items
+
+    /**
+     * to add values in orders
+     * ```
+     * INSERT INTO orders (order_id, order_date,customer_id) VALUES (NEXTVAL('sequence_orders'), CURRENT_TIMESTAMP, 1);
+     * ```
+     * >CURRENT_TIMESTAMP == now()
+     */
+
+
+
     //TODO you will encounter this problem with JSON and ObjectMapper
+
+
+
     /*
 
 {
@@ -33,6 +48,7 @@ public interface OrderStorage {
             }
         ]
 }
+
 
 this JSON comes from frontEnd
 and this should be converted with addOrder() to update tables orders & order_items
